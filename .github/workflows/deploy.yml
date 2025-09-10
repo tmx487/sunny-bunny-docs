@@ -10,7 +10,7 @@ on:
   
   # Запуск при изменениях в основной ветке
   push:
-    branches: [ v4 ]
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -37,7 +37,7 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '22'
         cache: 'npm'
     
     - name: Install dependencies
