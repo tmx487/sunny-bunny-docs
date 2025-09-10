@@ -130,16 +130,15 @@ async function syncVault() {
     // Создаем индексную страницу если её нет
     const indexPath = path.join(CONTENT_DIR, 'index.md');
     if (!fs.existsSync(indexPath)) {
-      const indexContent = `
-      ---
-      title: Главная страница
-      ---
+      const indexContent = `---
+title: Главная страница
+---
 
-      # sunny-bunny-docs-vault.
+# sunny-bunny-docs-vault.
 
-      ***
+***
 
-      *Последнее обновление: ${new Date().toLocaleDateString('ru-RU')}*
+*Последнее обновление: ${new Date().toLocaleDateString('ru-RU')}*
       `;
       fs.writeFileSync(indexPath, indexContent);
       console.log('✅ Создана главная страница');
