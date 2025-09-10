@@ -12,12 +12,11 @@
     "url": "https://github.com/jackyzha0/quartz.git"
   },
   "scripts": {
-    "quartz": "./quartz/bootstrap-cli.mjs",
-    "docs": "npx quartz build --serve -d docs",
-    "check": "tsc --noEmit && npx prettier . --check",
-    "format": "npx prettier . --write",
-    "test": "tsx --test",
-    "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1"
+    "sync": "node sync-vault.cjs",
+    "build": "npx quartz build",
+    "serve": "npx quartz build --serve",
+    "sync-and-build": "npm run sync && npm run build",
+    "deploy": "npm run sync && npm run build"
   },
   "engines": {
     "npm": ">=10.9.2",
@@ -47,6 +46,7 @@
     "d3": "^7.9.0",
     "esbuild-sass-plugin": "^3.3.1",
     "flexsearch": "0.7.43",
+    "fs-extra": "^11.3.1",
     "github-slugger": "^2.0.0",
     "globby": "^14.1.0",
     "gray-matter": "^4.0.3",

@@ -1,0 +1,1 @@
+https://medium.com/@atakankorez/smart-enums-in-c-30a39114e9fc

@@ -1,0 +1,68 @@
+name: Sync Vault and Deploy to GitHub Pages
+
+on:
+  # Автоматический запуск каждый день в 9:00 UTC
+  schedule:
+    - cron: '0 9 * * *'
+  
+  # Запуск вручную
+  workflow_dispatch:
+  
+  # Запуск при изменениях в основной ветке
+  push:
+    branches: [ v4 ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  sync-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-22.04
+    
+    steps:
+    - name: Checkout Quartz
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Sync content from vault
+      env:
+        VAULT_REPO: https://github.com/tmx487/learn-vault.git
+      run: |
+        # Обновляем URL репозитория в скрипте
+        sed -i "s|const VAULT_REPO = '.*'|const VAULT_REPO = '$VAULT_REPO'|" sync-vault.js
+        # Запускаем синхронизацию
+        npm run sync
+    
+    - name: Build Quartz
+      run: npx quartz build
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+    
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: public
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

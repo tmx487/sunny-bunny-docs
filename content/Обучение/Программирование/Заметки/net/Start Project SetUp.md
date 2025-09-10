@@ -1,0 +1,5 @@
+- AutoMapper.Extensions.Microsoft.DependencyInjection
+- Microsoft.EntityFrameworkCore
+- Microsoft.EntityFrameworkCore.Design
+- Microsoft.EntityFrameworkCore.InMemory (only for in memory DB)
+- Microsoft.EntityFrameworkCore.SqlServer (only for Sql Server DB)
