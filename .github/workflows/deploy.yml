@@ -48,7 +48,7 @@ jobs:
         VAULT_REPO: https://github.com/tmx487/learn-vault.git
       run: |
         # Обновляем URL репозитория в скрипте
-        sed -i "s|const VAULT_REPO = '.*'|const VAULT_REPO = '$VAULT_REPO'|" sync-vault.js
+        sed -i "s|const VAULT_REPO = '.*'|const VAULT_REPO = '$VAULT_REPO'|" sync-vault.cjs
         # Запускаем синхронизацию
         npm run sync
     
