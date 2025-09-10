@@ -2,9 +2,7 @@
 title: Главная страница
 ---
 
-# 🌱
-
-sunny-bunny-docs-vault.
+# sunny-bunny-docs-vault.
 
 ---
 
